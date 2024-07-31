@@ -1,39 +1,102 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
 
 namespace MVP.Model
 {
+    public class SlotItem
+    {
+        public IItem Item;
+        public int Count;
+
+        public SlotItem(IItem item, int count)
+        {
+            Item = item;
+            Count = count;
+        }
+    }
+    
     public class InventoryModel : IInventoryModel
     {
-        private Tuple<IItem, int>[] _inventory;
+        private readonly SlotItem[] _inventory;
         
         public InventoryModel(int size)
         {
-            _inventory = new Tuple<IItem, int>[size];
+            _inventory = new SlotItem[size];
         }
 
-        public IEnumerable<Tuple<IItem, int>> GetItems() => _inventory;
-
-        public void DropItem(uint itemId)
+        public IEnumerable<SlotItem> GetItems() => _inventory;
+        public void RemoveItem(IItem item)
         {
-            throw new System.NotImplementedException();
+            int index = GetItemIndex(item);
+
+            if (0 <= index && index < _inventory.Length)
+            {
+                int count = _inventory[index].Count;
+
+                if (count == 1)
+                {
+                    _inventory[index] = null;    
+                }
+                else
+                {
+                    _inventory[index] = new SlotItem(item, count - 1);
+                }
+            }
         }
 
-        public void PickupItem(uint itemId)
+        public void AddItem(IItem item)
         {
-            throw new System.NotImplementedException();
+            int find = GetItemIndex(item);
+
+            if (find < 0)
+            {
+                int i = 0;
+                for (; i < _inventory.Length; i++)
+                {
+                    var tuple = _inventory[i];
+
+                    if (tuple == null)
+                    {
+                        break;
+                    }
+                }
+
+                _inventory[i] = new SlotItem(item, 1);
+            }
+            else
+            {
+                int count = _inventory[find].Count;
+                _inventory[find] = new SlotItem(item, count + 1);
+            }            
         }
 
-        public void SwitchItems(int lIdx, int rIdx)
+        public void MoveItem(SlotItem item, int index)
         {
-            throw new System.NotImplementedException();
+            _inventory[index] = item;
         }
 
-        public Tuple<IItem, int> GetItem(int index)
+        private int GetItemIndex(IItem item)
         {
-            throw new NotImplementedException();
+            bool found = false;
+            int i = 0;
+            for (; i < _inventory.Length; i++)
+            {
+                if (_inventory[i] == null)
+                {
+                    continue;
+                }
+
+                if (_inventory[i].Item.GetId().Equals(item.GetId()))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            return found ? i : -1;
         }
     }
 }

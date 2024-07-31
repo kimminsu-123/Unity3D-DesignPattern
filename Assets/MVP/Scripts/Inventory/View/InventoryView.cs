@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
+using MVP.Model;
 using MVP.Presenter;
 using UnityEngine;
 
@@ -9,6 +11,9 @@ namespace MVP.View
 {
     public class InventoryView : MonoBehaviour, IInventoryView
     {
+        // for test
+        [SerializeField] private Item[] itemPrefabs;
+        
         [SerializeField] private InventorySlot[] slots;
         
         private IInventoryPresenter _presenter;
@@ -18,18 +23,76 @@ namespace MVP.View
             _presenter = new InventoryPresenter(this);
         }
 
-        public void UpdateInventory(IEnumerable<Tuple<IItem, int>> items)
+        private void Update()
+        {
+            // for test
+            PickupItemTest();
+            DropItemTest();
+        }
+
+        private void PickupItemTest()
+        {
+            // pickup Item 1
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _presenter.AddItem(itemPrefabs[0]);
+            }
+            
+            // pickup Item 2
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _presenter.AddItem(itemPrefabs[1]);
+            }
+            
+            // pickup Item 3
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                _presenter.AddItem(itemPrefabs[2]);
+            }
+        }
+
+        private void DropItemTest()
+        {
+            // pickup Item 1
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _presenter.RemoveItem(itemPrefabs[0]);
+            }
+            
+            // pickup Item 2
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                _presenter.RemoveItem(itemPrefabs[1]);
+            }
+            
+            // pickup Item 3
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _presenter.RemoveItem(itemPrefabs[2]);
+            }
+        }
+
+        public void RegisterOnClickSlot(Action<InventorySlot> callback)
+        {
+            foreach (InventorySlot slot in slots)
+            {
+                slot.RegisterOnClickSlot(callback);
+            }
+        }
+
+        public void UpdateInventory(IEnumerable<SlotItem> items)
         {
             int index = 0;
             
-            foreach (Tuple<IItem, int> item in items)
+            foreach (SlotItem item in items)
             {
-                slots[index++].SetItem(item.Item1, item.Item2);
-
-                if (index >= slots.Length)
+                if (item == null)
                 {
-                    break;
+                    slots[index++].Clear();
+                    continue;
                 }
+                
+                slots[index++].SetItem(item);
             }
         }
 
@@ -39,6 +102,17 @@ namespace MVP.View
             {
                 slot.Clear();
             }
+        }
+
+        public void InputGrabItem(SlotItem item)
+        {
+            _presenter.RemoveItem(item.Item);
+        }
+
+        public void InputDropItem(InventorySlot slot, SlotItem item)
+        {
+            int index = slots.ToList().IndexOf(slot);
+            _presenter.MoveItem(item, index);
         }
     }
 }

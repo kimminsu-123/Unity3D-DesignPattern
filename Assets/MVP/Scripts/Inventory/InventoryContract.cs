@@ -1,29 +1,34 @@
 using System;
 using System.Collections.Generic;
 using DesignPattern.MVP.Interfaces;
+using MVP;
+using MVP.Model;
 
 namespace DesignPattern.MVP.Inventory
 {
     public interface IInventoryView
     {
-        public void UpdateInventory(IEnumerable<Tuple<IItem, int>> items);
+        public void RegisterOnClickSlot(Action<InventorySlot> callback);
+        public void UpdateInventory(IEnumerable<SlotItem> items);
         public void ClearInventory();
+
+        public void InputGrabItem(SlotItem slot);
+        public void InputDropItem(InventorySlot slot, SlotItem item);
     }
     
     public interface IInventoryPresenter
     {
-        public void DropItem(uint itemId);
-        public void PickupItem(uint itemId);
-        public void SwitchItems(int lIdx, int rIdx);
-        public Tuple<IItem, int> GetItem(int index);
+        public void RemoveItem(IItem item);
+        public void AddItem(IItem item);
+        public void MoveItem(SlotItem item, int index);
     }
     
     public interface IInventoryModel
     {
-        public IEnumerable<Tuple<IItem, int>> GetItems();
-        public void DropItem(uint itemId);
-        public void PickupItem(uint itemId);
-        public void SwitchItems(int lIdx, int rIdx);
-        public Tuple<IItem, int> GetItem(int index);
+        public void RemoveItem(IItem item);
+        public void AddItem(IItem item);
+        public void MoveItem(SlotItem item, int index);
+
+        public IEnumerable<SlotItem> GetItems();
     }
 }

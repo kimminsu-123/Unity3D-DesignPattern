@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
 using MVP.Model;
+using UnityEngine;
 
 namespace MVP.Presenter
 {
@@ -13,41 +14,29 @@ namespace MVP.Presenter
 
         public InventoryPresenter(IInventoryView view)
         {
-            _inventoryView = view;
-            
             // presenter 를 scriptable object 로 만들면 좋을 듯?
             _inventoryModel = new InventoryModel(25);
             
-            _inventoryView.UpdateInventory(null);
+            _inventoryView = view;
+            _inventoryView.ClearInventory();
         }
 
-        public void DropItem(uint itemId)
+        public void RemoveItem(IItem item)
         {
-            _inventoryModel.DropItem(itemId);
-
-            IEnumerable<Tuple<IItem, int>> items = _inventoryModel.GetItems();
-            _inventoryView.UpdateInventory(items);
+            _inventoryModel.RemoveItem(item);
+            _inventoryView.UpdateInventory(_inventoryModel.GetItems());
         }
 
-        public void PickupItem(uint itemId)
+        public void AddItem(IItem item)
         {
-            _inventoryModel.PickupItem(itemId);
-
-            IEnumerable<Tuple<IItem, int>> items = _inventoryModel.GetItems();
-            _inventoryView.UpdateInventory(items);
+            _inventoryModel.AddItem(item);
+            _inventoryView.UpdateInventory(_inventoryModel.GetItems());
         }
 
-        public void SwitchItems(int lIdx, int rIdx)
+        public void MoveItem(SlotItem item, int index)
         {
-            _inventoryModel.SwitchItems(lIdx, rIdx);
-            
-            IEnumerable<Tuple<IItem, int>> items = _inventoryModel.GetItems();
-            _inventoryView.UpdateInventory(items);
-        }
-
-        public Tuple<IItem, int> GetItem(int index)
-        {
-            throw new NotImplementedException();
+            _inventoryModel.MoveItem(item, index);
+            _inventoryView.UpdateInventory(_inventoryModel.GetItems());
         }
     }
 }
