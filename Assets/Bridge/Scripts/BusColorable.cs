@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MVP.Bridge
+namespace Bridge
 {
     public class BusColorable : MonoBehaviour, IColorable
     {

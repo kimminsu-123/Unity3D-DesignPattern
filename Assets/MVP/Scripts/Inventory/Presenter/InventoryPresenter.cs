@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
 using MVP.Model;
-using UnityEngine;
 
 namespace MVP.Presenter
 {

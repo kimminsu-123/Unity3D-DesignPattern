@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
 using MVP.Model;
 using MVP.Presenter;

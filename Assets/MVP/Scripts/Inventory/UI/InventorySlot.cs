@@ -1,9 +1,6 @@
 using System;
-using DesignPattern.MVP.Interfaces;
-using MVP;
 using MVP.Model;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;

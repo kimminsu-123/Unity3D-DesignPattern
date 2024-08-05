@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace MVP.Bridge
+namespace Bridge
 {
     public class CarManager : MonoBehaviour
     {

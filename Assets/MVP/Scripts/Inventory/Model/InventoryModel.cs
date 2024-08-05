@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DesignPattern.MVP.Interfaces;
 using DesignPattern.MVP.Inventory;
 
@@ -31,20 +29,7 @@ namespace MVP.Model
         public void RemoveItem(IItem item)
         {
             int index = GetItemIndex(item);
-
-            if (0 <= index && index < _inventory.Length)
-            {
-                int count = _inventory[index].Count;
-
-                if (count == 1)
-                {
-                    _inventory[index] = null;    
-                }
-                else
-                {
-                    _inventory[index] = new SlotItem(item, count - 1);
-                }
-            }
+            _inventory[index] = null;    
         }
 
         public void AddItem(IItem item)

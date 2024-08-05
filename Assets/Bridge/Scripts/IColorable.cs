@@ -1,4 +1,4 @@
-namespace MVP.Bridge
+namespace Bridge
 {
     public interface IColorable
     {
