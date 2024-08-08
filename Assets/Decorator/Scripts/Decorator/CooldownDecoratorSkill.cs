@@ -1,32 +1,33 @@
 using System;
-using System.ComponentModel;
-using System.Security.Cryptography;
 using UnityEngine;
 
-public class CooldownDecoratorSkill : DecoratorSkill
+namespace Decorator.Scripts.Decorator
 {
-    private int _cooldownTick;
-    private TimeSpan _lastedUseTime; 
+    public class CooldownDecoratorSkill : DecoratorSkill
+    {
+        private int _cooldownTick;
+        private TimeSpan _lastedUseTime; 
     
-    public CooldownDecoratorSkill(ISkill skill, int cooldownTick) : base(skill)
-    {
-        _lastedUseTime = TimeSpan.Zero;
-        _cooldownTick = cooldownTick;
-    }
-
-    public override void Use()
-    {
-        TimeSpan now = DateTime.Now.TimeOfDay;
-        double diff = now.TotalMilliseconds - _lastedUseTime.TotalMilliseconds;
-        
-        if (diff > _cooldownTick)
+        public CooldownDecoratorSkill(ISkill skill, int cooldownTick) : base(skill)
         {
-            _lastedUseTime = now;
-            base.Use();
+            _lastedUseTime = TimeSpan.Zero;
+            _cooldownTick = cooldownTick;
         }
-        else
+
+        public override void Use()
         {
-            Debug.Log($"아직 쿨타임 중입니다. {diff}");
+            TimeSpan now = DateTime.Now.TimeOfDay;
+            double diff = now.TotalMilliseconds - _lastedUseTime.TotalMilliseconds;
+        
+            if (diff > _cooldownTick)
+            {
+                _lastedUseTime = now;
+                base.Use();
+            }
+            else
+            {
+                Debug.Log($"아직 쿨타임 중입니다. {diff}");
+            }
         }
     }
 }

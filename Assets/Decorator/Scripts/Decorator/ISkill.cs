@@ -1,4 +1,7 @@
-public interface ISkill
+namespace Decorator.Scripts.Decorator
 {
-    public void Use();
+    public interface ISkill
+    {
+        public void Use();
+    }
 }

@@ -1,20 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class SkillLoader : MonoBehaviour
+namespace Decorator.Scripts
 {
-    public SkillsData data;
-
-    private void Awake()
+    public class SkillLoader : MonoBehaviour
     {
-        Load();
-    }
+        public SkillsData data;
 
-    private void Load()
-    {
-        TextAsset text = Resources.Load<TextAsset>("Skill");
-        data = JsonUtility.FromJson<SkillsData>(text.text);
+        private void Awake()
+        {
+            Load();
+        }
+
+        private void Load()
+        {
+            TextAsset text = Resources.Load<TextAsset>("Skill");
+            data = JsonUtility.FromJson<SkillsData>(text.text);
+        }
     }
 }

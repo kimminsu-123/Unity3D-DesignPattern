@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class DamageDecoratorSkill : DecoratorSkill
+namespace Decorator.Scripts.Decorator
 {
-    private int _damage;
+    public class DamageDecoratorSkill : DecoratorSkill
+    {
+        private int _damage;
     
-    public DamageDecoratorSkill(ISkill skill, int damage) : base(skill)
-    {
-        _damage = damage;
-    }
+        public DamageDecoratorSkill(ISkill skill, int damage) : base(skill)
+        {
+            _damage = damage;
+        }
 
-    public override void Use()
-    {
-        base.Use();
+        public override void Use()
+        {
+            base.Use();
         
-        Debug.Log($"대미지를 주었습니다 : {_damage}");
+            Debug.Log($"대미지를 주었습니다 : {_damage}");
+        }
     }
 }

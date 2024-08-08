@@ -1,16 +1,17 @@
-using UnityEngine;
-
-public class DecoratorSkill : ISkill
+namespace Decorator.Scripts.Decorator
 {
-    private ISkill _skill;
+    public class DecoratorSkill : ISkill
+    {
+        private ISkill _skill;
 
-    protected DecoratorSkill(ISkill skill)
-    {
-        _skill = skill;
-    }
+        protected DecoratorSkill(ISkill skill)
+        {
+            _skill = skill;
+        }
     
-    public virtual void Use()
-    {
-        _skill?.Use();
+        public virtual void Use()
+        {
+            _skill?.Use();
+        }
     }
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class BaseSkill : ISkill
+namespace Decorator.Scripts.Decorator
 {
-    public void Use()
+    public class BaseSkill : ISkill
     {
-        // 기본적으로 서버에 통신을 보내는 로직이 있으면 좋을 듯?
-        Debug.Log("스킬을 사용합니다.");
+        public void Use()
+        {
+            // 기본적으로 서버에 통신을 보내는 로직이 있으면 좋을 듯?
+            Debug.Log("스킬을 사용합니다.");
+        }
     }
 }

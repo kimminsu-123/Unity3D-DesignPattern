@@ -1,25 +1,27 @@
-using System;
 using UnityEngine;
 
-public class Client : MonoBehaviour
+namespace Decorator.Scripts
 {
-    public SkillGenerator generator;
-
-    private void Update()
+    public class Client : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        public SkillGenerator generator;
+
+        private void Update()
         {
-            generator.GetSkill(1).Use();
-        }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                generator.GetSkill(1).Use();
+            }
         
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            generator.GetSkill(2).Use();
-        }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                generator.GetSkill(2).Use();
+            }
         
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            generator.GetSkill(3).Use();
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                generator.GetSkill(3).Use();
+            }
         }
     }
 }

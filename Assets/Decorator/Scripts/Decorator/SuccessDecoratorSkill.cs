@@ -2,35 +2,38 @@ using System;
 using UnityEngine;
 using Random = System.Random;
 
-public class SuccessDecoratorSkill : DecoratorSkill
+namespace Decorator.Scripts.Decorator
 {
-    private int _successPercent;
-
-    public SuccessDecoratorSkill(ISkill skill, int successPercent) : base(skill)
+    public class SuccessDecoratorSkill : DecoratorSkill
     {
-        _successPercent = successPercent;
-    }
+        private int _successPercent;
 
-    public override void Use()
-    {
-        try
+        public SuccessDecoratorSkill(ISkill skill, int successPercent) : base(skill)
         {
-            Random r = new Random();
-            int value = r.Next(1, 100);
-
-            if (value <= _successPercent)
-            {
-                Debug.Log($"스킬 사용 성공 {value}");
-                base.Use();
-            }
-            else
-            {
-                Debug.Log($"스킬 사용 실패 {value}");
-            }
+            _successPercent = successPercent;
         }
-        catch (Exception e)
+
+        public override void Use()
         {
-            Debug.Log(e.Message);
+            try
+            {
+                Random r = new Random();
+                int value = r.Next(1, 100);
+
+                if (value <= _successPercent)
+                {
+                    Debug.Log($"스킬 사용 성공 {value}");
+                    base.Use();
+                }
+                else
+                {
+                    Debug.Log($"스킬 사용 실패 {value}");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+            }
         }
     }
 }
