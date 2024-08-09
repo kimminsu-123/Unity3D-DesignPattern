@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70535b1cb6af4563b2ec5ab4e3731dc7, type: 3}
+  m_Name: Data1
+  m_EditorClassIdentifier: 
+  hair: {fileID: 5576241363902097558, guid: 74fc71cc527fe55429bc8f094bda464d, type: 3}
+  hairColor: {r: 0, g: 0.88305783, b: 1, a: 1}
+  face: {fileID: 1552948521256265047, guid: 740bf3725d6d64241a8a9556edb26bc8, type: 3}
+  faceColor: {r: 0.35020578, g: 1, b: 0, a: 1}
+  eyes: {fileID: 6483730927759185929, guid: 8b28b61afa81bef4786031e5484c9098, type: 3}
+  eyesColor: {r: 0, g: 0, b: 0, a: 1}
+  body: {fileID: 2406868743869587591, guid: ac54b54dddf13d742b0938f472f3fdb9, type: 3}
+  bodyColor: {r: 1, g: 0.9584457, b: 0, a: 1}
